@@ -67,16 +67,11 @@ def updatedata(zone_count,current_time):
 def take_frame():
     '''
     Returns one frame from webcam
+    Uncomment cv2.imwrite to save image
     '''
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
     # cv2.imwrite('webcamphoto.jpg', frame)
-
-    '''
-    cv2.imwrite('webcamphoto.jpg', frame) 
-    if need to output the image ^^
-    to change data type of the image file - change .jpg to .png etc
-    ''' 
     cap.release()
     return frame
 
@@ -142,15 +137,12 @@ data = {"start_time_left_zone": 0, "prev_left_zone_count": 0,"start_time_centre_
         "start_time_right_zone": 0, "prev_right_zone_count": 0}
         
 prev_time = 0
-i=0
 outputfile= "Time.csv"
 input_type= "image" # image or video
 
-while(i<=4):
+while(True):
   current_time = time.time()
   if(current_time-prev_time)>30: #run updates every X seconds, 86400 for 1 day
-    i+=1
-    
     if input_type == "image":
       path = r'D:/PeekingDuck/Images/AppleBanana.png' # input full path to image, change \ to /
       image = cv2.imread(path)
